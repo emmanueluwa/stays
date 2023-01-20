@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Navbar from "../components/navbar";
-import Image from "next/image";
+import Hero from "../components/hero";
 import { Inter } from "@next/font/google";
 import styles from "@/styles/Home.module.css";
 
@@ -22,8 +22,10 @@ export default function Home() {
         />
       </Head>
       <Navbar />
-      <div className="h-screen"></div>
       {/* Hero */}
+      <Hero />
+      <div className="h-screen"></div>
+
       {/* New Listings */}
       {/* Hero */}
       {/* take action */}

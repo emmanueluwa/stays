@@ -5,7 +5,7 @@ import NavBtn from "./navBtn";
 
 export default function Navbar({}) {
   const buttons = [
-    { title: "Rent", underline: "-bottom-[1.2]" },
+    { title: "Rent", underline: "-bottom-[1.2] bg-[#d8a90f]" },
     { title: "Short stays", underline: "-bottom-[1.2]" },
     { title: "Blog", underline: "-bottom-[1.2]" },
     { title: "About us", underline: "-bottom-[1.2]" },

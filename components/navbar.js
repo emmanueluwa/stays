@@ -39,11 +39,12 @@ export default function Navbar({}) {
         {/* links */}
         <div className="hidden lg:flex">
           <ul className="flex space-x-10 items-center  py-4">
-            {buttons.map((button) => (
+            {buttons.map((button, id) => (
               <NavBtn
                 title={button.title}
                 border={button.border}
                 underline={button.underline}
+                key={id}
               />
             ))}
           </ul>

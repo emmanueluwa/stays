@@ -6,7 +6,7 @@ export default function Hero() {
   const buttons = [
     { title: "RENT", underline: "bg-[#d8a90f]" },
     { title: "SHORT STAYS" },
-    { title: "FEATURED", css: "hidden sm:flex sm:-bottom-0 sm:h-[-4px]" },
+    { title: "FEATURED", css: "hidden sm:block" },
     { title: "FORUM" },
   ];
   return (
@@ -32,11 +32,12 @@ export default function Hero() {
 
         <ul className="">
           <div className="pt-10 flex space-x-7 sm:space-x-5">
-            {buttons.map((button) => (
+            {buttons.map((button, id) => (
               <HeroBtn
                 title={button.title}
                 underline={button.underline}
                 css={button.css}
+                key={id}
               />
             ))}
           </div>

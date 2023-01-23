@@ -63,11 +63,12 @@ export default function NewListings() {
       {/* listings */}
 
       <div className="pt-4 flex flex-nowrap overflow-x-scroll w-full space-x-3 pb-4 mb-20">
-        {cards.map((card) => (
+        {cards.map((card, id) => (
           <CardComponent
             img={card.photo}
             price={card.price}
             credit={card.artist}
+            key={id}
           />
         ))}
       </div>

@@ -5,11 +5,19 @@ import { Inter } from "@next/font/google";
 import styles from "../styles/Home.module.css";
 import NewListings from "../components/newListings";
 import Footer from "../components/footer";
+import {ApolloClient, ApolloProvider, InMemoryCache, useQuery, gql} from "@apollo/client"
+import { useObotaQuery } from "../src/generated/graphql";
 
 const inter = Inter({ subsets: ["latin"] });
 
+
+
 export default function Home() {
+  const { data, loading } = useObotaQuery();
+
   return (
+ 
+
     <div className="">
       <Head>
         <title>Stays</title>
@@ -29,6 +37,11 @@ export default function Home() {
 
       {/* take action */}
       {/* blogs */}
+      { !data ? (
+        <h1>Loading...</h1>
+      )
+        : <div>{data.obota}</div>
+      }
 
       {/* footer */}
       <Footer />

@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
 import Navbar from "../components/navbar";
+import { setAccessToken } from "../libs/accessToken";
 import { useLoginMutation } from "../src/generated/graphql";
 
 
@@ -31,6 +32,11 @@ export default function Login() {
           });
 
           console.log(response);
+
+          if (response && response.data) {
+            setAccessToken(response.data.login.accessToken)
+          }
+
           router.push("/");
         }}>
           <div>

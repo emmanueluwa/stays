@@ -19,7 +19,7 @@ export default function Lare() {
           (!data) ? (
             <div>no data!</div>
           ) : 
-          <div>{data.lare}/</div>
+          <div>{data.lare}</div>
         }
       </div>
     );

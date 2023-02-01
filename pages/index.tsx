@@ -7,6 +7,7 @@ import NewListings from "../components/newListings";
 import Footer from "../components/footer";
 import {ApolloClient, ApolloProvider, InMemoryCache, useQuery, gql} from "@apollo/client"
 import { useObotaQuery, User, useUsersQuery } from "../src/generated/graphql";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,10 +15,6 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const {data, } = useUsersQuery({fetchPolicy: 'network-only'});
-
-  // const userData = {
-  //   user: data.users
-  // }
 
   return (
  
@@ -45,7 +42,11 @@ export default function Home() {
           ))}
         </ul>
         }
-       
+
+        <Link href="/lare">
+        <div>lare</div>
+
+        </Link>
             
 
 

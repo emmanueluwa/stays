@@ -57,6 +57,19 @@ export type User = {
   id: Scalars['Int'];
 };
 
+export type LareQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type LareQuery = { __typename?: 'Query', lare: string };
+
+export type LoginMutationVariables = Exact<{
+  email: Scalars['String'];
+  password: Scalars['String'];
+}>;
+
+
+export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'LoginResponse', accessToken: string } };
+
 export type ObotaQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -76,6 +89,72 @@ export type UsersQueryVariables = Exact<{ [key: string]: never; }>;
 export type UsersQuery = { __typename?: 'Query', users: Array<{ __typename?: 'User', id: number, email: string }> };
 
 
+export const LareDocument = gql`
+    query Lare {
+  lare
+}
+    `;
+
+/**
+ * __useLareQuery__
+ *
+ * To run a query within a React component, call `useLareQuery` and pass it any options that fit your needs.
+ * When your component renders, `useLareQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useLareQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useLareQuery(baseOptions?: Apollo.QueryHookOptions<LareQuery, LareQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<LareQuery, LareQueryVariables>(LareDocument, options);
+      }
+export function useLareLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<LareQuery, LareQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<LareQuery, LareQueryVariables>(LareDocument, options);
+        }
+export type LareQueryHookResult = ReturnType<typeof useLareQuery>;
+export type LareLazyQueryHookResult = ReturnType<typeof useLareLazyQuery>;
+export type LareQueryResult = Apollo.QueryResult<LareQuery, LareQueryVariables>;
+export const LoginDocument = gql`
+    mutation Login($email: String!, $password: String!) {
+  login(email: $email, password: $password) {
+    accessToken
+  }
+}
+    `;
+export type LoginMutationFn = Apollo.MutationFunction<LoginMutation, LoginMutationVariables>;
+
+/**
+ * __useLoginMutation__
+ *
+ * To run a mutation, you first call `useLoginMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useLoginMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [loginMutation, { data, loading, error }] = useLoginMutation({
+ *   variables: {
+ *      email: // value for 'email'
+ *      password: // value for 'password'
+ *   },
+ * });
+ */
+export function useLoginMutation(baseOptions?: Apollo.MutationHookOptions<LoginMutation, LoginMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<LoginMutation, LoginMutationVariables>(LoginDocument, options);
+      }
+export type LoginMutationHookResult = ReturnType<typeof useLoginMutation>;
+export type LoginMutationResult = Apollo.MutationResult<LoginMutation>;
+export type LoginMutationOptions = Apollo.BaseMutationOptions<LoginMutation, LoginMutationVariables>;
 export const ObotaDocument = gql`
     query Obota {
   obota

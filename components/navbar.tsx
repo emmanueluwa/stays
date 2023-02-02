@@ -4,8 +4,12 @@ import Image from "next/image";
 import NavBtn from "./navBtn";
 import Link from 'next/link'
 import Head from "next/head";
+import { useMeQuery } from "../src/generated/graphql";
 
 export default function Navbar({children}) {
+
+  const {data, } = useMeQuery();
+
   const buttons = [
     { title: "Rent", underline: "-bottom-[1.2] bg-[#d8a90f]" },
     { title: "Short stays", underline: "-bottom-[1.2]" },
@@ -70,16 +74,31 @@ export default function Navbar({children}) {
           </div>
         </div>
 
-        <div className="hidden lg:flex items-center pl-8">
-          <Link href="/login">
-            <button>Log in</button>
-          </Link>
-          <div className="bg-[#d8a90f] p-2 rounded-[0.5rem] px-4 ml-4 flex items-center">
-          <Link href="/register">
-            <button>Sign up</button>
-          </Link>
-          </div>
-        </div>
+          {/* large page, logged in or logged out */}
+
+          {(data && data.me) ? (
+            <div className="bg-[#d8a90f] p-2 rounded-[0.5rem] px-4 ml-4 flex items-center">
+              <div>logged in as: {data.me.email}</div>
+            </div>
+          ):  
+          
+            <div className="hidden lg:flex items-center pl-8">
+              <Link href="/login">
+                <button>Log in</button>
+              </Link>
+              <div className="bg-[#d8a90f] p-2 rounded-[0.5rem] px-4 ml-4 flex items-center">
+                <Link href="/register">
+                  <button>Sign up</button>
+                </Link>
+              </div>
+            </div>
+
+          }
+
+          
+        
+
+        
       </div>
       <main>{children}</main>
     </div>

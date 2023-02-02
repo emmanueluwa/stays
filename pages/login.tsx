@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import Navbar from "../components/navbar";
 import { setAccessToken } from "../libs/accessToken";
-import { useLoginMutation } from "../src/generated/graphql";
+import { MeDocument, MeQuery, useLoginMutation } from "../src/generated/graphql";
 
 
 interface Props {
@@ -20,7 +20,7 @@ export default function Login() {
 
     return(
       <Navbar>
-        <div>register</div>
+        <div>login</div>
         <form onSubmit={async e => {
           e.preventDefault()
           console.log('form submitted');
@@ -28,6 +28,22 @@ export default function Login() {
             variables: {
               email,
               password
+            },
+            //updating apollo cache
+            update: (store, {data}) => {
+              if (!data) {
+                return null;
+              }
+
+              //details when logging in user must match details when fetching 'me' #apollocache
+              store.writeQuery<MeQuery>({
+                query: MeDocument,
+                data: {
+                  __typename: "Query",
+                  me: data.login.user
+                }
+              })
+              
             }
           });
 

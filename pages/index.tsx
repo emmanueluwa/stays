@@ -30,7 +30,7 @@ export default function Home() {
 
         {/* take action */}
         {/* blogs */}
-        <div>Greetings</div>
+        {/* <div>Greetings</div>
         {
           (!data) ? (
             <div>loading...</div>
@@ -44,10 +44,7 @@ export default function Home() {
         </ul>
         }
 
-        <Link href="/lare">
-        <div>lare</div>
-
-        </Link>
+        
 
         
 

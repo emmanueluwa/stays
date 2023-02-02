@@ -4,11 +4,14 @@ import Image from "next/image";
 import NavBtn from "./navBtn";
 import Link from 'next/link'
 import Head from "next/head";
-import { useMeQuery } from "../src/generated/graphql";
+import { useLogoutMutation, useMeQuery } from "../src/generated/graphql";
+import { setAccessToken } from "../libs/accessToken";
 
 export default function Navbar({children}) {
 
   const {data, } = useMeQuery();
+  //reset store when using apollo and logging user out
+  const [logout, {client}] = useLogoutMutation();
 
   const buttons = [
     { title: "Rent", underline: "-bottom-[1.2] bg-[#d8a90f]" },
@@ -77,8 +80,21 @@ export default function Navbar({children}) {
           {/* large page, logged in or logged out */}
 
           {(data && data.me) ? (
-            <div className="bg-[#d8a90f] p-2 rounded-[0.5rem] px-4 ml-4 flex items-center">
-              <div>logged in as: {data.me.email}</div>
+            <div className="hidden lg:flex items-center pl-8">
+              <Link href="/">
+                <button 
+                  onClick={async () => {
+                    await logout();
+                    setAccessToken("");
+                    await client!.resetStore();
+                  }}
+                >
+                  Logout
+                </button>
+              </Link>
+              <div className="bg-[#d8a90f] p-2 rounded-[0.5rem] px-4 ml-4 flex items-center">
+                <div>{data.me.email}</div>
+              </div>
             </div>
           ):  
           

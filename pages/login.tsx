@@ -23,7 +23,7 @@ export default function Login() {
         <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
           <div className="w-full max-w-md space-y-8">
             <div className="">
-              <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">login</h2>
+              <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Login</h2>
             </div>
             <form className="mt-8 space-y-6"
                 onSubmit={async e => {
@@ -60,7 +60,7 @@ export default function Login() {
 
                 router.push("/");
               }}>
-              <div className="-space-y-px rounded-md shadow-sm">
+              <div className="space-y-8 rounded-md shadow-sm">
                 <div>
                   <label htmlFor="email-address" className="sr-only">Email</label>
                   <input
@@ -73,7 +73,6 @@ export default function Login() {
                   />
                 </div>
 
-              </div>
               <div>
                 <label htmlFor="password" className="sr-only">Password</label>
                 <input
@@ -86,12 +85,13 @@ export default function Login() {
                   }}
                 />
               </div>
-              <button 
-                className="group relative flex w-full justify-center rounded-md border border-transparent bg-[#d8a90f] py-2 px-4 text-sm font-medium text-black hover:bg-[#d8a90f] focus:outline-none focus:ring-2 focus:ring-[#d8a90f] focus:ring-offset-2"
-                type="submit"
+                <button 
+                  className="group relative flex w-full justify-center rounded-md border border-transparent bg-[#d8a90f] py-2 px-4 text-sm font-medium text-black hover:bg-[#d8a90f] focus:outline-none focus:ring-2 focus:ring-[#d8a90f] focus:ring-offset-2"
+                  type="submit"
                 >
                   login
                 </button>
+              </div>
             </form>
           </div>
         </div>

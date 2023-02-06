@@ -2,7 +2,6 @@ import Navbar from "../../components/navbar"
 import { getAllPostIds, getPostData } from "../../lib/posts";
 import Head from "next/head";
 import Date from "../../components/date";
-// import Date from "../../components/date";
 
 
 //using titles for url path
@@ -15,7 +14,7 @@ export async function getStaticPaths() {
 }
 
 //blog data
-export async function getStaticprops({ params }) {
+export async function getStaticProps({ params }) {
   const postData = await getPostData(params.id)
 
   return {

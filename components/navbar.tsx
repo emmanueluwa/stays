@@ -5,7 +5,7 @@ import NavBtn from "./navBtn";
 import Link from 'next/link'
 import Head from "next/head";
 import { useLogoutMutation, useMeQuery } from "../src/generated/graphql";
-import { setAccessToken } from "../libs/accessToken";
+import { setAccessToken } from "../lib/accessToken";
 
 export default function Navbar({children}) {
 

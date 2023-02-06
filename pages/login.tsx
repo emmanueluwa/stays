@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
 import Navbar from "../components/navbar";
-import { setAccessToken } from "../libs/accessToken";
+import { setAccessToken } from "../lib/accessToken";
 import { MeDocument, MeQuery, useLoginMutation } from "../src/generated/graphql";
 
 

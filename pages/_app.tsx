@@ -2,7 +2,7 @@ import '../styles/globals.css'
 import { AppProps } from 'next/app'
 import {ApolloClient, ApolloLink, ApolloProvider, HttpLink, InMemoryCache, Observable} from "@apollo/client"
 import { onError } from "@apollo/client/link/error";
-import { getAccessToken, setAccessToken } from '../libs/accessToken';
+import { getAccessToken, setAccessToken } from '../lib/accessToken';
 import { useEffect, useState } from 'react';
 import { TokenRefreshLink } from 'apollo-link-token-refresh'
 import jwtDecode, { JwtPayload } from 'jwt-decode';

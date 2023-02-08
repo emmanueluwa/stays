@@ -47,20 +47,26 @@ export default function Home({ allPostsData }) {
 
         {/* take action */}
         {/* blogs */}
-        <h2>Blog</h2>
-        <ul>
-          {
-            allPostsData.map(({ id, date, title }) => (
-                <li key={id}>
-                    <Link href={`/posts/${id}`}>{title}</Link>
-                    <br />
-                    <small>
-                        <Date dateString={date}/>
-                    </small>
-                </li>
-            ))
-          }
-            </ul>
+        <div className="mx-8 pb-2">
+          <div className="mt-8">
+            <p className="text-[24px] font-medium">Blog</p>
+          </div>
+          <ul className="pt-4 flex flex-nowrap">
+            {
+              allPostsData.map(({ id, date, title, cover_image }) => (
+                  <li key={id}>
+                      <Blog 
+                        post={cover_image}
+                        link_id={id}
+                        created={date}
+                        title={title}
+                      />
+                  </li>
+              ))
+            }
+          </ul>
+        </div>
+
         {/* <div>Greetings</div>
         {
           (!data) ? (

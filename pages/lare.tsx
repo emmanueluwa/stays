@@ -42,7 +42,7 @@ export default function Lare() {
               width={1000}
               height={1000}
               alt=""
-              className="m-15 mt-15 w-full h-[26rem] sm:h-[26rem]"
+              className="m-15 mt-15 w-auto h-[26rem] sm:h-[26rem]"
             />
           </div>
         

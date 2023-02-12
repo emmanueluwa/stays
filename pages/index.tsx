@@ -20,7 +20,6 @@ const inter = Inter({ subsets: ["latin"] });
 export async function getStaticProps() {
   const allPostsData = getSortedPostsData();
   
-
   return {
     props: {
       allPostsData,
@@ -33,6 +32,8 @@ export async function getStaticProps() {
 export default function Home({ allPostsData }) {
 
   const {data, } = useUsersQuery({fetchPolicy: 'network-only'});
+
+  const lastThree = allPostsData.slice(-3);
 
   return (
  
@@ -51,9 +52,9 @@ export default function Home({ allPostsData }) {
           <div className="mt-8">
             <p className="text-[24px] font-medium">Blog</p>
           </div>
-          <ul className="pt-4 flex flex-nowrap">
+          <ul className="pt-4 flex flex-nowrap space-x-3">
             {
-              allPostsData.map(({ id, date, title, cover_image }) => (
+              lastThree.map(({ id, date, title, cover_image }) => (
                   <li key={id}>
                       <Blog 
                         post={cover_image}

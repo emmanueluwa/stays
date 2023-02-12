@@ -11,11 +11,11 @@ export default function Blog({post, link_id, created, title}) {
           <div className="relative">
             <Image
               priority
-              width={256}
-              height={384}
+              width={1000}
+              height={1000}
               alt="image of pet on table by Dan Barrett "
               src={post}
-              className="w-full h-30 rounded-t"
+              className=" rounded-t"
             />
 
             {/* description */}

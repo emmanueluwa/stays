@@ -1,5 +1,5 @@
 ---
-title: "Navigating pet-friendly rental property laws and regulations"
+title: "Pet-friendly rental laws and regulations"
 date: "2023-02-07"
 cover_image: "/images/posts/blog_4.jpg"
 ---

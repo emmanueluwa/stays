@@ -1,5 +1,5 @@
 ---
-title: "Benefits of Renting a Pet-Friendly Property"
+title: "Benefits of Renting a pet-friendly Property"
 date: "2023-02-05"
 cover_image: "/images/posts/blog_1.jpg"
 ---

@@ -1,10 +1,28 @@
 import Link from "next/link";
 
 export default function NavBtn({ title, border, underline }) {
+  let link: string = ""
+  switch(title) {
+    case "Advertise":
+      link = "/lare"
+      break;
+    case "Rent":
+      link = "/"
+      break;
+    case "Short stays":
+      link = "/"
+      break;
+    case "About us":
+      link = "/"
+      break;
+    case "Blog":
+      link = "/blog"
+      break;
+  }
   return (
     <div>
       <li className="relative group mx-2 font-semibold whitespace-nowrap">
-        <Link href="/lare">
+        <Link href={link}>
           <button className={`px-2 ${border}`}>{title}</button>
         </Link>
         <div

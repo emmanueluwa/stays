@@ -4,7 +4,7 @@ import Hero from "../components/hero";
 import { Inter } from "@next/font/google";
 import styles from "../styles/Home.module.css";
 import NewListings from "../components/newListings";
-import Blog from "../components/blog";
+import Blog from "../components/blogCard";
 import Footer from "../components/footer";
 import {ApolloClient, ApolloProvider, InMemoryCache, useQuery, gql} from "@apollo/client"
 import { useMeQuery, useObotaQuery, User, useUsersQuery } from "../src/generated/graphql";

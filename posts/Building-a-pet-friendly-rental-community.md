@@ -4,8 +4,6 @@ date: "2023-02-08"
 cover_image: "/images/posts/blog_5.jpg"
 ---
 
-# Building a Pet-Friendly Rental Community in the UK
-
 The demand for pet-friendly rental properties has increased significantly in recent years, with many individuals considering their pets as members of their families. As a result, building a pet-friendly rental community in the UK has become a top priority for many landlords and property managers.
 
 In this blog post, we'll explore the various steps that landlords and property managers can take to build a successful pet-friendly rental community in the UK.

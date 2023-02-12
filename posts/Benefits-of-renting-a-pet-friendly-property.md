@@ -4,8 +4,6 @@ date: "2023-02-05"
 cover_image: "/images/posts/blog_1.jpg"
 ---
 
-# The Benefits of Renting a Pet-Friendly Property in the UK
-
 Are you a pet owner in the UK looking for a rental property that allows pets? Renting a pet-friendly property can offer many benefits for both you and your furry companion. In this blog, we'll explore some of the key benefits of renting a pet-friendly property in the UK.
 
 ## Reduced Stress for You and Your Pet

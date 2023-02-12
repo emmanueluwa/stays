@@ -4,8 +4,6 @@ date: "2023-02-07"
 cover_image: "/images/posts/blog_2.jpg"
 ---
 
-# Finding the Right Pet-Friendly Rental Property in the UK
-
 If you're a pet owner in the UK, finding the right rental property can be a challenge. But with the right tips and resources, you can find a pet-friendly rental that's perfect for you and your furry companion. In this blog, we'll explore some of the key factors to consider when searching for a pet-friendly rental in the UK.
 
 ## Location

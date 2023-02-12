@@ -4,8 +4,6 @@ date: "2023-02-07"
 cover_image: "/images/posts/blog_3.jpg"
 ---
 
-# Preparing for a Pet-Friendly Rental Property Move in the UK
-
 Moving to a new rental property can be a challenging and exciting experience, especially if you're a pet owner. But with the right preparation, you can make the transition to your new pet-friendly rental a smooth and stress-free experience. In this blog, we'll explore some of the key steps you can take to prepare for a pet-friendly rental move in the UK.
 
 ## Research Rentals

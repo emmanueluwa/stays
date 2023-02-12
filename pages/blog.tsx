@@ -16,7 +16,6 @@ export async function getStaticProps() {
 
 
 export default function Blog({ allPostsData }) {
-  console.log(allPostsData)
 
     return (
         <Navbar>

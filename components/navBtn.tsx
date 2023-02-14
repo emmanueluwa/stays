@@ -4,7 +4,7 @@ export default function NavBtn({ title, border, underline }) {
   let link: string = ""
   switch(title) {
     case "Advertise":
-      link = "/lare"
+      link = "/advertise"
       break;
     case "Rent":
       link = "/"

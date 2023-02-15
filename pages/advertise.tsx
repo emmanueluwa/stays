@@ -1,7 +1,11 @@
-import { Main } from "next/document";
+import router from "next/router";
+import { useState } from "react";
 import Navbar from "../components/navbar";
 
 export default function Advertise() {
+
+  const [freeAd, setFreeAdd] = useState(Boolean)
+
     return (
       <Navbar>
         <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -14,7 +18,13 @@ export default function Advertise() {
                 </div>
 
               {/* form  */}
-                <div className="space-y-8">
+                <form  className="space-y-8"
+                  onSubmit={async e => {
+                    // prevent browser from reloading page
+                    e.preventDefault()
+                    router.push("/adEin");
+                  }}
+                >
                   <div className="">
                     <div>
                       <h1>Please select your advert style</h1>
@@ -37,19 +47,24 @@ export default function Advertise() {
                         </div>
                       </div>
                       <div className="form-check py-6">
-                        <input className="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-[#d8a90f] checked:border-[#d8a90f] focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" value="" id="flexCheckChecked" />
-                        <label className="form-check-label inline-block text-gray-800" htmlFor="flexCheckChecked">
+                        <input 
+                            className="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-[#d8a90f] checked:border-[#d8a90f] focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" 
+                            type="checkbox" value="" id="accept"
+                            // checked={freeAd} onChange={e => setFreeAdd(e.target.checked)} 
+                            defaultChecked={true}
+                        />
+                        <label className="form-check-label inline-block text-gray-800" htmlFor="accept">
                           Free Advert
                         </label>
                       </div>
                     </div>
                   </div>
                   <div className="flex space-x-2 justify-center">
-                      <button className="group relative flex w-full justify-center rounded-md border border-transparent bg-[#d8a90f] py-2 px-4 text-sm font-medium text-black hover:bg-[#d8a90f] focus:outline-none focus:ring-2 focus:ring-[#d8a90f] focus:ring-offset-2">
+                      <button type="submit" className="group relative flex w-full justify-center rounded-md border border-transparent bg-[#d8a90f] py-2 px-4 text-sm font-medium text-black hover:bg-[#d8a90f] focus:outline-none focus:ring-2 focus:ring-[#d8a90f] focus:ring-offset-2">
                         Place an ad now
                       </button>
                   </div>
-                </div>
+                </form>
 
                 {/* accepted payments */}
                 {/* <h1>We will be accepting the following payments methods</h1> */}

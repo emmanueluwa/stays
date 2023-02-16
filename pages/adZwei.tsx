@@ -24,7 +24,7 @@ export default function AdZwei() {
 
     return (
        <Navbar>
-         <div className="flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
           <div className="flex flex-row flex-wrap py-4 space-y-8">
             
             <div className="mx-8">
@@ -44,7 +44,7 @@ export default function AdZwei() {
                     // prevent browser from reloading page
                     e.preventDefault()
                     router.push({
-                        pathname: "/adZwei",
+                        pathname: "/adDrei",
                     });
                   }}
               >
@@ -175,6 +175,6 @@ export default function AdZwei() {
             </aside>
           </div>
         </div>
-        </Navbar>
+       </Navbar>
     )
 }

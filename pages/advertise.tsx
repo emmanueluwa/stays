@@ -1,6 +1,7 @@
 import router from "next/router";
 import { useState } from "react";
 import Navbar from "../components/navbar";
+import SideBar from "../components/sideBar";
 
 export default function Advertise() {
 
@@ -69,15 +70,7 @@ export default function Advertise() {
                 {/* accepted payments */}
                 {/* <h1>We will be accepting the following payments methods</h1> */}
             </main>
-            <aside className="w-full sm:w-1/3 md:w-1/4 px-2 items-end">
-              <div className="sticky top-0 p-4 w-full">
-                <div className="flex items-center py-4">
-                  <div className="w-2 h-2 bg-[#d8a90f] rounded mr-1"></div>
-                  <p>Need help?</p>
-                </div>
-                <p>Contact us by <a>email</a></p>
-              </div>
-            </aside>
+            <SideBar />
           </div>
         </div>
         

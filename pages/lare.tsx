@@ -3,6 +3,8 @@ import  Navbar  from "../components/navbar";
 import Image from "next/image";
 import Link from "next/link";
 
+// restricted page 
+
 
 export default function Lare() {
   const {data, loading, error} = useLareQuery()

@@ -1,5 +1,3 @@
-/* eslint react/no-unescaped-entities */
-
 import Navbar from "../components/navbar";
 import SideBar from "../components/sideBar";
 
@@ -19,7 +17,7 @@ export default function About() {
                     <p>
                       At PetStays, we understand the bond between pets and their owners. 
                       We also know how challenging it can be to find a rental property that welcomes
-                       furry family members. That's why we created a platform that connects pet owners 
+                       furry family members. That&apos;s why we created a platform that connects pet owners 
                        to pet-friendly landlords across the UK.
                     </p>
 
@@ -38,13 +36,13 @@ export default function About() {
                       Our team is made up of passionate pet lovers and experienced property professionals
                       who work hard to ensure that our platform is easy to use, safe, and effective.
                       We are dedicated to providing excellent customer service and support to all of our users,
-                      and we're always happy to answer any questions or concerns you may have.
+                      and we&apos;re always happy to answer any questions or concerns you may have.
                     </p>
 
                     <h1 className="text-[20px] py-4 font-medium">The Community</h1>
 
                     <p>
-                      Whether you're a pet owner looking for a new home or a landlord who wants to attract
+                      Whether you&apos;re a pet owner looking for a new home or a landlord who wants to attract
                       responsible tenants, we invite you to join our community and start connecting with
                       like-minded individuals who share your passion for pets.
                     </p>

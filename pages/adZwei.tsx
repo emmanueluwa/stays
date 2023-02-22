@@ -1,5 +1,3 @@
-/* eslint react/no-unescaped-entities */
-
 import Navbar from "../components/navbar";
 import router from "next/router";import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid"
@@ -117,7 +115,7 @@ export default function AdZwei() {
                                   <label htmlFor="comments" className="font-medium text-gray-700">
                                     live out landlord
                                   </label>
-                                  <p className="text-gray-500">(I own the property but don't live there)</p>
+                                  <p className="text-gray-500">(I own the property but don&apos;t live there)</p>
                                 </div>
                               </div>
                               <div className="flex items-start">
@@ -133,7 +131,7 @@ export default function AdZwei() {
                                   <label htmlFor="candidates" className="font-medium text-gray-700">
                                     agent
                                   </label>
-                                  <p className="text-gray-500">(I am a advertising on a landlord's behalf)</p>
+                                  <p className="text-gray-500">(I am a advertising on a landlord&apos;s behalf)</p>
                                 </div>
                               </div>
                               <div className="flex items-start">

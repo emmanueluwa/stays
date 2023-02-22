@@ -1,5 +1,3 @@
-/* eslint react/no-unescaped-entities */
-
 import Navbar from "../components/navbar";
 import SideBar from "../components/sideBar";
 
@@ -19,9 +17,9 @@ export default function Contact() {
                     
                     <h1 className="text-[20px] py-4 font-medium">Our Mission</h1>
                     <p>
-                      Whether you're a pet owner looking for a new home or a landlord who wants to attract
+                      Whether you&apos;re a pet owner looking for a new home or a landlord who wants to attract
                       responsible tenants, we invite you to join our community and start connecting with
-                      like-minded individuals who share your passion for pets.
+                      like&dash;minded individuals who share your passion for pets.
                     </p>
 
                 </div>

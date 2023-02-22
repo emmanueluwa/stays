@@ -102,7 +102,7 @@ export default function App({ Component, pageProps }: AppProps) {
   (persisting user between refreshes)
   */
   useEffect(() => {
-    fetch('http://localhost:4000/refresh_token', { 
+    fetch('https://staysback.up.railway.app/refresh_token', { 
       method: "POST",
       credentials: "include" }).
       then(async x => {

@@ -1,3 +1,5 @@
+/* eslint react/no-unescaped-entities */
+
 import Navbar from "../components/navbar";
 import SideBar from "../components/sideBar";
 

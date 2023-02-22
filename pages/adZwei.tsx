@@ -1,3 +1,5 @@
+/* eslint react/no-unescaped-entities */
+
 import Navbar from "../components/navbar";
 import router from "next/router";import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid"

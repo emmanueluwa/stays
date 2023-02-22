@@ -66,7 +66,7 @@ export default function App({ Component, pageProps }: AppProps) {
           }
         },
         fetchAccessToken: () => {
-          return fetch('http://localhost:4000/refresh_token', { 
+          return fetch('https://staysback.up.railway.app/refresh_token', { 
             method: "POST",
             credentials: "include" 
           });
@@ -86,7 +86,7 @@ export default function App({ Component, pageProps }: AppProps) {
       }),
       requestLink,
       new HttpLink({
-        uri: 'http://localhost:4000/graphql',
+        uri: 'https://staysback.up.railway.app/graphql',
         credentials: "include"
       })
     ]),
@@ -102,7 +102,7 @@ export default function App({ Component, pageProps }: AppProps) {
   (persisting user between refreshes)
   */
   useEffect(() => {
-    fetch('https://staysback.up.railway.app', { 
+    fetch('https://staysback.up.railway.app/refresh_token', { 
       method: "POST",
       credentials: "include" }).
       then(async x => {

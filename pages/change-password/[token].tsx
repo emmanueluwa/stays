@@ -1,26 +1,17 @@
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { useState } from "react";
-import Navbar from "../components/navbar";
-import { setAccessToken } from "../lib/accessToken";
-import { MeDocument, MeQuery, useLoginMutation } from "../src/generated/graphql";
+import { NextPage } from "next"
+import Navbar from "../../components/navbar";
+import { MeQuery } from "../../src/generated/graphql";
 
 
-interface Props {
-  
-}
+const ChangePassword: NextPage<{token: string}> = ({ token }) => {
 
-export default function Login() {
+  const [, changePassword] = useChangePasswordMutation()
 
-  const router = useRouter();
+    const router = useRouter();
+    const [newPassword, setNewPassword] = useState('');
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [login] = useLoginMutation();
-
-
-    return(
-      <Navbar>
+    return (
+       <Navbar>
         <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
           <div className="w-full max-w-md space-y-8">
             <div className="">
@@ -30,10 +21,10 @@ export default function Login() {
                 onSubmit={async e => {
                   e.preventDefault()
                   console.log('form submitted');
-                  const response = await login({
+                  const response = await changePassword({
                     variables: {
-                      email,
-                      password
+                      newPassword,
+                      token
                     },
                     //updating apollo cache
                     update: (store, {data}) => {
@@ -63,47 +54,37 @@ export default function Login() {
               }}>
               <div className="space-y-8 rounded-md shadow-sm">
                 <div>
-                  <label htmlFor="email-address" className="sr-only">Email</label>
+                  <label htmlFor="email-address" className="sr-only">newPassword</label>
                   <input
                     className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-[#d8a90f] focus:outline-none focus:ring-[#d8a90f] sm:text-sm"
-                    value={email}
-                    placeholder="email"
+                    type="password"
+                    value={newPassword}
+                    placeholder="newPassword"
                     onChange={e => {
-                      setEmail(e.target.value);
+                      setNewPassword(e.target.value);
                     }}
                   />
                 </div>
 
-              <div>
-                <label htmlFor="password" className="sr-only">Password</label>
-                <input
-                  className="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-[#d8a90f] focus:outline-none focus:ring-[#d8a90f] sm:text-sm"
-                  type="password"
-                  value={password}
-                  placeholder="password"
-                  onChange={e => {
-                    setPassword(e.target.value);
-                  }}
-                />
-              </div>
                 <button 
                   className="group relative flex w-full justify-center rounded-md border border-transparent bg-[#d8a90f] py-2 px-4 text-sm font-medium text-black hover:bg-[#d8a90f] focus:outline-none focus:ring-2 focus:ring-[#d8a90f] focus:ring-offset-2"
                   type="submit"
                 >
-                  login
+                  change password
                 </button>
-                <div>
-                  <Link href="/forgot-password">
-                    <p className="mb-4 text-gray-600">
-                      forgot password
-                    </p>
-                  </Link>
-                </div>
               </div>
             </form>
           </div>
         </div>
 
       </Navbar>
-    ) 
+    )
 }
+
+ChangePassword.getInitialProps = ({ query }) => {
+  return {
+    token: query.token as string
+  }
+}
+
+export default ChangePassword;

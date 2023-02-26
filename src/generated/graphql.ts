@@ -15,10 +15,17 @@ export type Scalars = {
   Float: number;
 };
 
+export type FieldError = {
+  __typename?: 'FieldError';
+  field: Scalars['String'];
+  message: Scalars['String'];
+};
+
 export type LoginResponse = {
   __typename?: 'LoginResponse';
   accessToken: Scalars['String'];
-  user: User;
+  errors?: Maybe<Array<FieldError>>;
+  user?: Maybe<User>;
 };
 
 export type Mutation = {
@@ -60,6 +67,8 @@ export type User = {
   id: Scalars['Int'];
 };
 
+export type KnownUserFragment = { __typename?: 'User', id: number, email: string };
+
 export type LareQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -71,7 +80,7 @@ export type LoginMutationVariables = Exact<{
 }>;
 
 
-export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'LoginResponse', accessToken: string, user: { __typename?: 'User', id: number, email: string } } };
+export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'LoginResponse', accessToken: string, user?: { __typename?: 'User', id: number, email: string } | null } };
 
 export type LogoutMutationVariables = Exact<{ [key: string]: never; }>;
 
@@ -101,7 +110,12 @@ export type UsersQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type UsersQuery = { __typename?: 'Query', users: Array<{ __typename?: 'User', id: number, email: string }> };
 
-
+export const KnownUserFragmentDoc = gql`
+    fragment KnownUser on User {
+  id
+  email
+}
+    `;
 export const LareDocument = gql`
     query Lare {
   lare
@@ -139,12 +153,11 @@ export const LoginDocument = gql`
   login(email: $email, password: $password) {
     accessToken
     user {
-      id
-      email
+      ...KnownUser
     }
   }
 }
-    `;
+    ${KnownUserFragmentDoc}`;
 export type LoginMutationFn = Apollo.MutationFunction<LoginMutation, LoginMutationVariables>;
 
 /**
@@ -205,11 +218,10 @@ export type LogoutMutationOptions = Apollo.BaseMutationOptions<LogoutMutation, L
 export const MeDocument = gql`
     query Me {
   me {
-    id
-    email
+    ...KnownUser
   }
 }
-    `;
+    ${KnownUserFragmentDoc}`;
 
 /**
  * __useMeQuery__
@@ -304,11 +316,10 @@ export type RegisterMutationOptions = Apollo.BaseMutationOptions<RegisterMutatio
 export const UsersDocument = gql`
     query Users {
   users {
-    id
-    email
+    ...KnownUser
   }
 }
-    `;
+    ${KnownUserFragmentDoc}`;
 
 /**
  * __useUsersQuery__

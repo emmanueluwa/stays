@@ -1,7 +1,12 @@
+import { Box, Button } from "@chakra-ui/react";
+import { Form, Formik } from "formik";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { InputField } from "../components/InputField";
 import Navbar from "../components/navbar";
-import { useRegisterMutation } from "../src/generated/graphql";
+import { Wrapper } from "../components/Wappers";
+import { MeDocument, MeQuery, useRegisterMutation, UsernamePasswordInput } from "../src/generated/graphql";
+import { toErrorMap } from "../src/utils/toErrorMap";
 
 interface Props {
 
@@ -18,7 +23,32 @@ export default function Register() {
 
     return(
       <Navbar>
-        <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <Wrapper variant="small">
+          <Formik initialValues={{ email: "", password: "" }} 
+            onSubmit={async (values, {setErrors}) => {
+              console.log(values)
+              const response = await register({variables: {options: values}})
+              if (response.data?.register.errors) {
+                // destructure graphql error [{field: 'username', message: 'something'}]
+                setErrors(toErrorMap(response.data.register.errors))
+              } else if (response.data?.register.user) {
+                router.push("/");
+              }
+            }}>
+            {/* formik form component */}
+            {({ isSubmitting }) => (
+              <Form>
+                <InputField name="email" placeholder="email" label="Email"/>
+                <Box mt={4}>
+                <InputField name="password" placeholder="password" label="password" type="password"/>
+                </Box>
+              <Button mt={4} type="submit" isLoading={isSubmitting}>register</Button>
+              </Form>
+            )}
+          </Formik>
+        </Wrapper>
+
+        {/* <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
           <div className="w-full max-w-md space-y-8">
             <div>
               <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Register</h2>
@@ -26,15 +56,15 @@ export default function Register() {
          
             <form 
               className="mt-8 space-y-6"
-              onSubmit={async e => {
-                  e.preventDefault()
+              onSubmit={async (values) => {
+                  values.preventDefault()
                   console.log('form submitted');
                   const response = await register({
                     variables: {
-                      email,
-                      password
-                    }
-                  });
+                              options: values
+                            }
+                          },
+                  );
 
                   console.log(response);
                   router.push("/");
@@ -73,7 +103,7 @@ export default function Register() {
               </div>
             </form>
          </div>
-        </div>
+        </div> */}
       </Navbar>
     ) 
 }

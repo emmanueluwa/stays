@@ -5,13 +5,59 @@ import NavBtn from "./navBtn";
 import Link from 'next/link'
 import Head from "next/head";
 import { useLogoutMutation, useMeQuery } from "../src/generated/graphql";
-import { setAccessToken } from "../lib/accessToken";
+import { isServer } from "../src/utils/isServer";
+
+interface NavBarProps {}
 
 export default function Navbar({children}) {
 
-  const {data, } = useMeQuery();
+  const {data, loading} = useMeQuery({
+    //do not query on server
+    skip: isServer(),
+  });
   //reset store when using apollo and logging user out
-  const [logout, {client}] = useLogoutMutation();
+  const [logout, {loading: logoutLoading}] = useLogoutMutation();
+  let body = null;
+
+  //fetching data
+  if (loading) {
+    body = null
+    //user not logged in
+  } else if (!data?.me) {
+    body = (
+      <>
+        <div className="hidden lg:flex items-center pl-8">
+          <Link href="/login">
+            <button>Log in</button>
+          </Link>
+          <div className="bg-[#d8a90f] p-2 rounded-[0.5rem] px-4 ml-4 flex items-center">
+            <Link href="/register">
+              <button>Sign up</button>
+            </Link>
+          </div>
+        </div>
+      </>
+    )
+    //user logged in
+  } else {
+    body = (
+      <div className="hidden lg:flex items-center pl-8">
+        <Link href="/">
+          <button 
+            onClick={async () => {
+              await logout();
+            }}
+          >
+            Logout
+          </button>
+        </Link>
+        <div className="bg-[#d8a90f] p-2 rounded-[0.5rem] px-4 ml-4 flex items-center">
+          <div>{data.me.email}</div>
+        </div>
+      </div>
+    )
+
+  }
 
   const buttons = [
     { title: "Rent", underline: "-bottom-[1.2] bg-[#d8a90f]" },
@@ -77,9 +123,10 @@ export default function Navbar({children}) {
           </div>
         </div>
 
+        
           {/* large page, logged in or logged out */}
-
-          {(data && data.me) ? (
+          {body}
+          {/* {(data && data.me) ? (
             <div className="hidden lg:flex items-center pl-8">
               <Link href="/">
                 <button 
@@ -108,8 +155,7 @@ export default function Navbar({children}) {
                 </Link>
               </div>
             </div>
-
-          }
+          } */}
 
           
         

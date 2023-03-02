@@ -80,8 +80,8 @@ export type MutationDeletePostArgs = {
 export type Post = {
   __typename?: 'Post';
   id: Scalars['Float'];
-  CreatedAt: Scalars['String'];
-  UpdatedAt: Scalars['String'];
+  createdAt: Scalars['String'];
+  updatedAt: Scalars['String'];
   email: Scalars['String'];
   title: Scalars['String'];
   text: Scalars['String'];
@@ -134,7 +134,7 @@ export type ChangePasswordMutationVariables = Exact<{
 }>;
 
 
-export type ChangePasswordMutation = { __typename?: 'Mutation', changePassword: { __typename?: 'LoginResponse', user?: { __typename?: 'User', id: number, email: string } | null } };
+export type ChangePasswordMutation = { __typename?: 'Mutation', changePassword: { __typename?: 'LoginResponse', errors?: Array<{ __typename?: 'FieldError', field: string, message: string }> | null, user?: { __typename?: 'User', id: number, email: string } | null } };
 
 export type ForgotPasswordMutationVariables = Exact<{
   email: Scalars['String'];
@@ -170,6 +170,11 @@ export type ObotaQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type ObotaQuery = { __typename?: 'Query', obota: string };
+
+export type PostsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type PostsQuery = { __typename?: 'Query', posts: Array<{ __typename?: 'Post', id: number, createdAt: string, updatedAt: string, title: string }> };
 
 export type RegisterMutationVariables = Exact<{
   options: UsernamePasswordInput;
@@ -209,13 +214,10 @@ ${RegularUserFragmentDoc}`;
 export const ChangePasswordDocument = gql`
     mutation ChangePassword($token: String!, $newPassword: String!) {
   changePassword(token: $token, newPassword: $newPassword) {
-    user {
-      id
-      email
-    }
+    ...RegularUserResponse
   }
 }
-    `;
+    ${RegularUserResponseFragmentDoc}`;
 export type ChangePasswordMutationFn = Apollo.MutationFunction<ChangePasswordMutation, ChangePasswordMutationVariables>;
 
 /**
@@ -373,11 +375,10 @@ export type LogoutMutationOptions = Apollo.BaseMutationOptions<LogoutMutation, L
 export const MeDocument = gql`
     query Me {
   me {
-    id
-    email
+    ...RegularUser
   }
 }
-    `;
+    ${RegularUserFragmentDoc}`;
 
 /**
  * __useMeQuery__
@@ -437,6 +438,43 @@ export function useObotaLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Obot
 export type ObotaQueryHookResult = ReturnType<typeof useObotaQuery>;
 export type ObotaLazyQueryHookResult = ReturnType<typeof useObotaLazyQuery>;
 export type ObotaQueryResult = Apollo.QueryResult<ObotaQuery, ObotaQueryVariables>;
+export const PostsDocument = gql`
+    query Posts {
+  posts {
+    id
+    createdAt
+    updatedAt
+    title
+  }
+}
+    `;
+
+/**
+ * __usePostsQuery__
+ *
+ * To run a query within a React component, call `usePostsQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePostsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePostsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function usePostsQuery(baseOptions?: Apollo.QueryHookOptions<PostsQuery, PostsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PostsQuery, PostsQueryVariables>(PostsDocument, options);
+      }
+export function usePostsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PostsQuery, PostsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PostsQuery, PostsQueryVariables>(PostsDocument, options);
+        }
+export type PostsQueryHookResult = ReturnType<typeof usePostsQuery>;
+export type PostsLazyQueryHookResult = ReturnType<typeof usePostsLazyQuery>;
+export type PostsQueryResult = Apollo.QueryResult<PostsQuery, PostsQueryVariables>;
 export const RegisterDocument = gql`
     mutation Register($options: UsernamePasswordInput!) {
   register(options: $options) {

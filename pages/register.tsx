@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { InputField } from "../components/InputField";
 import Navbar from "../components/navbar";
-import { Wrapper } from "../components/Wappers";
+import { Wrapper } from "../components/Wrappers";
 import { MeDocument, MeQuery, useRegisterMutation, UsernamePasswordInput } from "../src/generated/graphql";
 import { toErrorMap } from "../src/utils/toErrorMap";
 

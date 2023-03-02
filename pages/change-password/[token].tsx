@@ -1,17 +1,61 @@
+import { Box, Button } from "@chakra-ui/react";
+import { Formik, Form } from "formik";
 import { NextPage } from "next"
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { useState } from "react";
+import { InputField } from "../../components/InputField";
 import Navbar from "../../components/navbar";
-import { MeQuery } from "../../src/generated/graphql";
+import { Wrapper } from "../../components/Wrappers";
+import { MeQuery, useChangePasswordMutation } from "../../src/generated/graphql";
+import { toErrorMap } from "../../src/utils/toErrorMap";
+import login from "../login";
 
 
 const ChangePassword: NextPage<{token: string}> = ({ token }) => {
 
-  const [, changePassword] = useChangePasswordMutation()
+  const [changePassword] = useChangePasswordMutation()
 
     const router = useRouter();
-    const [newPassword, setNewPassword] = useState('');
+    const [tokenError, setTokenError] = useState('');
 
     return (
        <Navbar>
+         <Wrapper variant="small">
+          <Formik initialValues={{ newPassword: "" }} 
+            onSubmit={async (values, {setErrors}) => {
+              console.log(values)
+              const response = await changePassword({
+                variables:  {
+                newPassword: values.newPassword,
+                token,
+              }
+              })
+              if (response.data?.changePassword.errors) {
+                const errorMap = toErrorMap(response.data.changePassword.errors)
+                if ('token' in errorMap) {
+                  //no token with user link
+                  setTokenError(errorMap.token);
+                }
+                setErrors(errorMap)
+              } else if (response.data?.changePassword.user) {
+                router.push("/");
+              }
+            }}>
+            {/* formik form component */}
+            {({ isSubmitting }) => (
+              <Form>
+                <InputField name="newPassword" placeholder="new password" label="New Password" type="password"/>
+                {tokenError ? <Box color="red">{tokenError}</Box> : null}
+                <Link href="forgot-password">
+                  <p>link to reset password</p>
+                </Link>
+                <Button mt={4} type="submit" isLoading={isSubmitting}>change password</Button>
+              </Form>
+            )}
+          </Formik>
+        </Wrapper>
+{/*         
         <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
           <div className="w-full max-w-md space-y-8">
             <div className="">
@@ -75,7 +119,7 @@ const ChangePassword: NextPage<{token: string}> = ({ token }) => {
               </div>
             </form>
           </div>
-        </div>
+        </div> */}
 
       </Navbar>
     )

@@ -1,11 +1,11 @@
-import { Box, Button } from "@chakra-ui/react";
+import { Box, Button, Flex } from "@chakra-ui/react";
 import { Formik, Form } from "formik";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { InputField } from "../components/InputField";
 import Navbar from "../components/navbar";
-import { Wrapper } from "../components/Wappers";
+import { Wrapper } from "../components/Wrappers";
 import { setAccessToken } from "../lib/accessToken";
 import { MeDocument, MeQuery, useLoginMutation } from "../src/generated/graphql";
 import { toErrorMap } from "../src/utils/toErrorMap";
@@ -43,8 +43,13 @@ export default function Login() {
               <Form>
                 <InputField name="email" placeholder="email" label="Email"/>
                 <Box mt={4}>
-                <InputField name="password" placeholder="password" label="password" type="password"/>
+                  <InputField name="password" placeholder="password" label="password" type="password"/>
                 </Box>
+                <Flex>
+                  <Box>
+                    <Link href="/forgot-password"><p>Forgot password?</p></Link>
+                  </Box>
+                </Flex>
               <Button mt={4} type="submit" isLoading={isSubmitting}>login</Button>
               </Form>
             )}

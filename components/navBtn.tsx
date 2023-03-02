@@ -13,7 +13,7 @@ export default function NavBtn({ title, border, underline }) {
       link = "/"
       break;
     case "About us":
-      link = "/"
+      link = "/about"
       break;
     case "Blog":
       link = "/blog"

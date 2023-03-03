@@ -12,7 +12,7 @@ import { toErrorMap } from "../../src/utils/toErrorMap";
 import login from "../login";
 
 
-const ChangePassword: NextPage<{token: string}> = ({ token }) => {
+const ChangePassword: NextPage = () => {
 
   const [changePassword] = useChangePasswordMutation()
 
@@ -28,7 +28,8 @@ const ChangePassword: NextPage<{token: string}> = ({ token }) => {
               const response = await changePassword({
                 variables:  {
                 newPassword: values.newPassword,
-                token,
+                token: 
+                  typeof router.query.token === 'string' ? router.query.token : "",
               }
               })
               if (response.data?.changePassword.errors) {
@@ -123,12 +124,6 @@ const ChangePassword: NextPage<{token: string}> = ({ token }) => {
 
       </Navbar>
     )
-}
-
-ChangePassword.getInitialProps = ({ query }) => {
-  return {
-    token: query.token as string
-  }
 }
 
 export default ChangePassword;

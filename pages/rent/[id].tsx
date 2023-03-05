@@ -1,19 +1,14 @@
-import { Heading } from "@chakra-ui/react";
+import { Box, Heading } from "@chakra-ui/react";
 import { useRouter } from "next/router";
+import EditDeletePostButtons from "../../components/editDeletePostButtons";
 import Navbar from "../../components/navbar";
 import { usePostQuery } from "../../src/generated/graphql";
+import { useGetPostFromUrl } from "../../src/utils/useGetPostFromUrl";
 
 export default function RentDetail({ }) {
 
-  const router = useRouter();
-  const Id = typeof router.query.id === "string" ? parseInt(router.query.id) : -1;
- 
-  const {loading, data} = usePostQuery({
-    pause: intId === -1,
-    variables: {
-      id: intId
-    }
-  });
+  const {loading, data} = useGetPostFromUrl()
+   
 
     if (loading){
     return (
@@ -25,16 +20,17 @@ export default function RentDetail({ }) {
 
   if (!data?.post) {
     return (
-      <Layout>
+      <Navbar>
         <Box>could not find post</Box>
-      </Layout>
+      </Navbar>
     )
   } 
 
   return (
       <Navbar>
-        <Heading>{data?.post?.title}</Heading>
-        {data?.post?.text}
+        <Heading mb={4}>{data.post.title}</Heading>
+        <Box mb={4}>{data.post.text}</Box>
+        <EditDeletePostButtons id={data.post.id} creatorId={data.post.creator.id}/>
       </Navbar>
 
     )

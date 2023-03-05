@@ -6,10 +6,13 @@ import Link from 'next/link'
 import Head from "next/head";
 import { useLogoutMutation, useMeQuery } from "../src/generated/graphql";
 import { isServer } from "../src/utils/isServer";
+import { useRouter } from "next/router"
 
 interface NavBarProps {}
 
 export default function Navbar({children}) {
+
+  const router = useRouter();
 
   const {data, loading} = useMeQuery({
     //do not query on server
@@ -130,6 +133,7 @@ export default function Navbar({children}) {
                 <button 
                   onClick={async () => {
                     await logout();
+                    router.reload()
                   }}
                 >
                   Logout

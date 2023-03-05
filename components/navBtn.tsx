@@ -7,7 +7,7 @@ export default function NavBtn({ title, border, underline }) {
       link = "/advertise"
       break;
     case "Rent":
-      link = "/"
+      link = "/rent"
       break;
     case "Short stays":
       link = "/"

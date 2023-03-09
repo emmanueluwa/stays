@@ -7,7 +7,7 @@ import { useState } from "react";
 import { InputField } from "../../components/InputField";
 import Navbar from "../../components/navbar";
 import { Wrapper } from "../../components/Wrappers";
-import { MeQuery, useChangePasswordMutation } from "../../src/generated/graphql";
+import { MeDocument, MeQuery, useChangePasswordMutation } from "../../src/generated/graphql";
 import { toErrorMap } from "../../src/utils/toErrorMap";
 import login from "../login";
 
@@ -30,6 +30,15 @@ const ChangePassword: NextPage = () => {
                 newPassword: values.newPassword,
                 token: 
                   typeof router.query.token === 'string' ? router.query.token : "",
+              },
+              update: (cache, {data}) => {
+              cache.writeQuery<MeQuery>({
+                  query: MeDocument,
+                  data: {
+                    __typename: "Query",
+                    me: data?.changePassword.user,
+                  },
+                });
               }
               })
               if (response.data?.changePassword.errors) {

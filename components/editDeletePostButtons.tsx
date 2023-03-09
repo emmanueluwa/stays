@@ -23,13 +23,16 @@ export default function EditDeletePostButtons({ id, creatorId }: editDeletePostB
     
     <Box>
       <Link href={`/rent/edit/${id}`}>
-        <IconButton mr={4} icon={<AiFillEdit />} aria-label="Edit Post"></IconButton>
+        {/* <IconButton mr={4} icon={<AiFillEdit />} aria-label="Edit Post"></IconButton> */}
       </Link>
       <IconButton
         aria-label="Delete Post"
-        icon={<DeleteIcon />}
+        // icon={<DeleteIcon />}
         onClick={() => {
-          deletePost({ id });
+          deletePost({ variables: { id }, update: (cache) => {
+            cache.evict({ id: "Post:" + id });
+          },
+         });
         }}
       />
     </Box>

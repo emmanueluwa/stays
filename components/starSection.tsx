@@ -1,10 +1,47 @@
+import { ApolloCache } from "@apollo/client";
 import { Flex, IconButton } from "@chakra-ui/react";
 import { useState } from "react";
-import { PostSnippetFragment, useVoteMutation } from "../src/generated/graphql";
+import { gql } from "urql";
+import { PostSnippetFragment, useVoteMutation, VoteMutation } from "../src/generated/graphql";
 
 interface StarSectionProps {
   post: PostSnippetFragment;
 }
+
+const  updateAfterVote = (value: number, postId: number, cache: ApolloCache<VoteMutation>) => {
+  const data = cache.readFragment<{
+    id: number
+    points: number
+    voteStatus: number | null;
+  }>({
+    id: 'Post:' + postId,
+    fragment: gql`
+      fragment _ on Post {
+        id
+        points
+        voteStatus
+      }
+    `,
+  });
+
+  if (data) {
+    if (data.voteStatus === value) {
+      return;
+    }
+    const newPoints = 
+      (data.points as number) + (!data.voteStatus ? 1 : 2) * value;
+    cache.writeFragment({
+      id: 'Post:' + postId,
+      fragment: gql`
+        fragment __ on Post {
+          points
+          voteStatus
+        }
+    `,
+    data: { points: newPoints, voteStatus: value },
+    });
+  }
+};
 
 export default function StarSection({ post }: StarSectionProps) {
   const [loadingState, setLoadingState] = useState<'upstar-loading' | 'downstar-loading' | 'not-loading'>('not-loading');
@@ -26,7 +63,9 @@ export default function StarSection({ post }: StarSectionProps) {
             variables: {
             postId: post.id,
             value: 1,
-          }})
+          },
+          update: (cache) => updateAfterVote(1, post.id, cache),
+        })
           setLoadingState('not-loading')
         }}
         variant={post.voteStatus === 1 ? "green" : 'undefined'}
@@ -45,7 +84,9 @@ export default function StarSection({ post }: StarSectionProps) {
             variables: {
             postId: post.id,
             value: -1,
-          }})
+          },
+          update: (cache) => updateAfterVote(-1, post.id, cache),
+        })
           setLoadingState('not-loading')
         }}
         variant={post.voteStatus === -1 ? "red" : 'undefined'}

@@ -30,14 +30,14 @@ export default function EditPost({ }) {
   }
 
   
-  if (!data.post) {
+  if (!data?.post) {
     return <div>could not find the post</div>
   }
   
     return (
        <Navbar>
         <Wrapper>
-          <Formik initialValues={{ title: data.post.title, text: data.post.text }} 
+          <Formik initialValues={{ title: data.post?.title, text: data?.post.text }} 
             onSubmit={async (values) => {
               await updatePost({ variables: {id: intId, ...values} })
               router.back()

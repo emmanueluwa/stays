@@ -60,6 +60,8 @@ export default function Navbar({children}) {
 
   // }
 
+  // console.log(data.me.email)
+
   const buttons = [
     { title: "Rent", underline: "-bottom-[1.2] bg-[#d8a90f]" },
     { title: "Short stays", underline: "-bottom-[1.2]" },

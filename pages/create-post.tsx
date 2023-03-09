@@ -28,11 +28,17 @@ export default function CreatePost<CreatePostProps>() {
   
     return (
       <Navbar>
-        <Wrapper>
+        <Wrapper variant="small">
           <Formik initialValues={{ title: "", text: "" }} 
             onSubmit={async (values) => {
-              await createPost({variables: {input: values}})
-              router.push("/rent")
+              const { errors } = await createPost({variables: {input: values},
+                update: (cache) => {
+                  cache.evict({ fieldName: "posts:{}" });
+                }
+              });
+              if (!errors) {
+                router.push("/rent")
+              }
             }}>
             {/* formik form component */}
             {({ isSubmitting }) => (
@@ -41,7 +47,7 @@ export default function CreatePost<CreatePostProps>() {
                 <Box mt={4}>
                   <InputField textarea name="text" placeholder="text..." label="Body" />
                 </Box>
-              <Button mt={4} type="submit" isLoading={isSubmitting}>create post</Button>
+              <Button mt={4} type="submit" background="#d8a90f" isLoading={isSubmitting}>create post</Button>
               </Form>
             )}
           </Formik>

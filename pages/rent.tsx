@@ -11,10 +11,13 @@ export default function Rent() {
   const {data, loading, error, fetchMore, variables}  = usePostsQuery({
     variables: { 
       limit: 10, 
-      cursor: null }
-  },
-  // notifyOnNetworkStatusChange: true,
-  );
+      cursor: null 
+    },
+    //trigger when loading
+    notifyOnNetworkStatusChange: true,
+  });
+  
+  
 
 
   if (!loading && !data) {
@@ -60,8 +63,31 @@ export default function Rent() {
                 variables: {
                 limit: variables?.limit,
                 cursor: data.posts.posts[data.posts.posts.length - 1].createdAt,
-              }})
-            }} m="auto" my={8}
+              }, 
+              //pagination
+              // updateQuery: (
+              //   previousValue,
+              //   {fetchMoreResult}
+              //   ): PostsQuery => {
+              //   if (!fetchMoreResult) {
+              //     return previousValue as PostsQuery
+              //   }
+
+              //   return {
+              //     __typename: "Query",
+              //     posts: {
+              //       __typename: "PaginatedPosts",
+              //       hasMore: (fetchMoreResult as PostsQuery).posts.hasMore,
+              //       posts: [
+              //         ...(previousValue as PostsQuery).posts.posts,
+              //         ...(fetchMoreResult as PostsQuery).posts.posts,
+              //       ]
+              //     }
+              //   }
+              // }
+              }); 
+            }}
+             m="auto" my={8}
             >load more
             </Button>
           </Flex>

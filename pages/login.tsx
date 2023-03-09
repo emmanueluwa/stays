@@ -29,8 +29,19 @@ export default function Login() {
          <Wrapper variant="small">
           <Formik initialValues={{ email: "", password: "" }} 
             onSubmit={async (values, {setErrors}) => {
-              console.log(values)
-              const response = await login({variables: values})
+              const response = await login({
+                variables: values, 
+                update: (cache, {data}) => {
+                cache.writeQuery<MeQuery>({
+                    query: MeDocument,
+                    data: {
+                      __typename: "Query",
+                      me: data?.login.user,
+                    },
+                  });
+                  cache.evict({ fieldName: "posts:{}" });
+              },
+            });
               if (response.data?.login.errors) {
                 // destructure graphql error [{field: 'username', message: 'something'}]
                 setErrors(toErrorMap(response.data.login.errors))

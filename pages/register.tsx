@@ -26,8 +26,17 @@ export default function Register() {
         <Wrapper variant="small">
           <Formik initialValues={{ email: "", password: "" }} 
             onSubmit={async (values, {setErrors}) => {
-              console.log(values)
-              const response = await register({variables: {options: values}})
+              const response = await register({variables: {options: values},
+                update:(cache, {data}) => {
+                  cache.writeQuery<MeQuery>({
+                    query: MeDocument,
+                    data: {
+                      __typename: "Query",
+                      me: data?.register.user,
+                    }
+                  })
+                }
+              })
               if (response.data?.register.errors) {
                 // destructure graphql error [{field: 'username', message: 'something'}]
                 setErrors(toErrorMap(response.data.register.errors))

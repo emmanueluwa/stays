@@ -7,12 +7,13 @@ import Navbar from "../components/navbar";
 import { Wrapper } from "../components/Wrappers";
 import { MeDocument, MeQuery, useRegisterMutation, UsernamePasswordInput } from "../src/generated/graphql";
 import { toErrorMap } from "../src/utils/toErrorMap";
+import { withApollo } from "../src/utils/withApollo";
 
 interface Props {
 
 }
 
-export default function Register() {
+const Register = () => {
 
   const router = useRouter();
 
@@ -51,7 +52,7 @@ export default function Register() {
                 <Box mt={4}>
                 <InputField name="password" placeholder="password" label="password" type="password"/>
                 </Box>
-              <Button mt={4} type="submit" isLoading={isSubmitting}>register</Button>
+              <Button mt={4} type="submit" background="#d8a90f" isLoading={isSubmitting}>register</Button>
               </Form>
             )}
           </Formik>
@@ -116,3 +117,5 @@ export default function Register() {
       </Navbar>
     ) 
 }
+
+export default withApollo({ ssr: false })(Register);

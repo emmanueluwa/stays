@@ -9,13 +9,14 @@ import { Wrapper } from "../components/Wrappers";
 import { useCreatePostMutation, useMeQuery } from "../src/generated/graphql";
 import { toErrorMap } from "../src/utils/toErrorMap";
 import { useIsAuth } from "../src/utils/useIsAuth";
+import { withApollo } from "../src/utils/withApollo";
 import login from "./login";
 
 interface CreatePostProps {
 
 }
 
-export default function CreatePost<CreatePostProps>() {
+const CreatePost = () => {
 
   //making sure logged in to access page
   /*
@@ -29,7 +30,15 @@ export default function CreatePost<CreatePostProps>() {
     return (
       <Navbar>
         <Wrapper variant="small">
-          <Formik initialValues={{ title: "", text: "" }} 
+          <Formik initialValues={{
+             title: "",
+             text: "",
+             type: "",
+             location: "",
+             price: "",
+             included: "",
+             availability: "",
+            }} 
             onSubmit={async (values) => {
               const { errors } = await createPost({variables: {input: values},
                 update: (cache) => {
@@ -47,7 +56,22 @@ export default function CreatePost<CreatePostProps>() {
                 <Box mt={4}>
                   <InputField textarea name="text" placeholder="text..." label="Body" />
                 </Box>
-              <Button mt={4} type="submit" background="#d8a90f" isLoading={isSubmitting}>create post</Button>
+                <Box mt={4}>
+                  <InputField name="type" placeholder="Flat/house..." label="Property Type" />
+                </Box>
+                <Box mt={4}>
+                  <InputField name="location" placeholder="location..." label="Location" />
+                </Box>
+                <Box mt={4}>
+                  <InputField name="price" placeholder="price..." label="Price" />
+                </Box>
+                <Box mt={4}>
+                  <InputField name="included" placeholder="included..." label="Bills Included?" />
+                </Box>
+                <Box mt={4}>
+                  <InputField name="availability" placeholder="availability..." label="Availability" />
+                </Box>
+              <Button my={4} type="submit" background="#d8a90f" isLoading={isSubmitting}>create post</Button>
               </Form>
             )}
           </Formik>
@@ -55,3 +79,5 @@ export default function CreatePost<CreatePostProps>() {
       </Navbar>
     )
 }
+
+export default withApollo({ ssr: false })(CreatePost);

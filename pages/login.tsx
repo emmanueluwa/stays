@@ -66,7 +66,7 @@ export default function Login() {
                     <Link href="/forgot-password"><p>Forgot password?</p></Link>
                   </Box>
                 </Flex>
-              <Button mt={4} type="submit" isLoading={isSubmitting}>login</Button>
+              <Button mt={4} type="submit" background="#d8a90f" isLoading={isSubmitting}>login</Button>
               </Form>
             )}
           </Formik>

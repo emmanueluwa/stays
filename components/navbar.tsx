@@ -28,6 +28,7 @@ export default function Navbar({children}) {
   //   //user not logged in
   // } else if (!data?.me) {
   //   body = (
+  //     <>
   //       <div className="hidden lg:flex items-center pl-8">
   //         <Link href="/login">
   //           <button>Log in</button>
@@ -38,10 +39,12 @@ export default function Navbar({children}) {
   //           </Link>
   //         </div>
   //       </div>
+  //     </>
   //   )
   //   //user logged in
   // } else {
   //   body = (
+  //     <>
   //     <div className="hidden lg:flex items-center pl-8">
   //       <Link href="/">
   //         <button 
@@ -56,6 +59,7 @@ export default function Navbar({children}) {
   //         <div>{data.me.email}</div>
   //       </div>
   //     </div>
+  //     </>
   //   )
 
   // }

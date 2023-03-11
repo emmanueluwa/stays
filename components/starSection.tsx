@@ -1,5 +1,6 @@
 import { ApolloCache } from "@apollo/client";
 import { Flex, IconButton } from "@chakra-ui/react";
+import { ChevronUpIcon, ChevronDownIcon } from "@chakra-ui/icons"
 import { useState } from "react";
 import { gql } from "urql";
 import { PostSnippetFragment, useVoteMutation, VoteMutation } from "../src/generated/graphql";
@@ -53,12 +54,13 @@ export default function StarSection({ post }: StarSectionProps) {
         alignItems="center"
         mr={4}
       >
-      <IconButton 
+      
+      <ChevronUpIcon 
         onClick={async () => {
           if (post.voteStatus === 1) {
             return;
           }
-          setLoadingState('upstar-loading')
+          setLoadingState('upstar-loading');
           await vote({
             variables: {
             postId: post.id,
@@ -68,13 +70,13 @@ export default function StarSection({ post }: StarSectionProps) {
         })
           setLoadingState('not-loading')
         }}
-        variant={post.voteStatus === 1 ? "green" : 'undefined'}
-        isLoading= {loadingState==='upstar-loading'}
-        icon-button="chevron-up"
+        // variant={post.voteStatus === 1 ? "green" : 'undefined'}
+        // isLoading={loadingState==='upstar-loading'}
+        icon-button=""
         aria-label="star post"
       />
       {post.points}
-      <IconButton
+      <ChevronDownIcon
         onClick={async () => {
           if (post.voteStatus === -1) {
             return;
@@ -89,8 +91,8 @@ export default function StarSection({ post }: StarSectionProps) {
         })
           setLoadingState('not-loading')
         }}
-        variant={post.voteStatus === -1 ? "red" : 'undefined'}
-        isLoading= {loadingState==='downstar-loading'}
+        // variant={post.voteStatus === -1 ? "red" : 'undefined'}
+        // isLoading= {loadingState==='downstar-loading'}
         icon-button="chevron-down" 
         aria-label="dislikepost"
       />
